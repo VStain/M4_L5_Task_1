@@ -4,6 +4,17 @@
 #include <string>
 #include <cstdlib>
 
+/*Задача 1. Адреса
+В этом задании вы будете читать адреса из файла и выводить их в другой файл в другом формате.
+
+Вам дан файл in.txt, в котором находится N адресов. Число N идёт первым в файле. После числа N располагаются N блоков по 4 строки в каждом. 
+Каждый блок состоит из следующих строк: название города, название улицы, номер дома, номер квартиры.
+
+Задача программы заключается в том, чтобы считать адреса из файла in.txt и вывести их в файл out.txt в другом формате и в обратном порядке. 
+Не забудьте вывести количество адресов в начале.
+
+Формат вывода адреса: <название города>, <название улицы>, <номер дома>, <номер квартиры>.*/
+
 using namespace std;
 
 class Address
@@ -20,13 +31,25 @@ public:
 
     void get_output_address(int index, string str)
     {
-        Set_city(str);
-        cout << "Number appart is : " << city_1 << endl;
-       // Set_street(str);
-       // Set_number_house(str);
-        //Set_number_apart(str);
-        //return city_1; //, street_1, number_house_1, number_apart_1;
+
     }
+    string Get_city(string city)
+    {
+        return city_1 = city;
+    }
+    string Get_street(string street)
+    {
+        return street_1 = street;
+    }
+    int Get_house_number(string house_number)
+    {
+        return house_number_1 = stoi(house_number);
+    }
+    int Get_apart_number(string apart_number)
+    {
+        return apart_number__1 = stoi(apart_number);
+    }
+
     void Set_city(string city)
     {
         city_1 = city;
@@ -35,19 +58,19 @@ public:
     {
         street_1 = street;
     }
-    void Set_number_house(string number_house)
+    void Set_house_number(string house_number)
     {
-        number_house_1 = stoi(number_house);
+        house_number_1 = stoi(house_number);
     }
-    void Set_number_apart(string number_apart)
+    void Set_apart_number(string apart_number)
     {
-        number_apart_1 = stoi(number_apart);
+        apart_number__1 = stoi(apart_number);
     }
 private:
     string city_1;
     string street_1;
-    int number_house_1 = 0;
-    int number_apart_1 = 0;
+    int house_number_1 = 0;
+    int apart_number__1 = 0;
 };
 
 int main()
@@ -55,27 +78,64 @@ int main()
     setlocale(LC_ALL, "Rus");
     string str;
     string address_count;
-    ifstream file_to_use("C:\\VHome Dump\\My Projects\\Home_Works\\Module_4\\M4_L5_Task_1\\in.txt");
+    ifstream input("C:\\VHome Dump\\My Projects\\Home_Works\\Module_4\\M4_L5_Task_1\\in.txt");
 
-    if (file_to_use.is_open())
+    if (input.is_open())
     {
 
-        file_to_use >> str;
-        int const address_count = stoi(str);
+        input >> str;
+        int address_count = stoi(str);
         Address* address_arr = new Address[address_count];
-        file_to_use >> str;
-        address_arr[0].get_output_address(address_count, str);
-
-        /*for (int x = 0; x < address_count; ++x)
+        
+        // считать данные для каждого адреса
+        for (int i = 0; i < address_count; ++i)
         {
-            file_to_use >> str;
-            Address[address_count];
+            string city, street, house_number, flat_number;
+            // считать название города в строку
+            input >> city;
+            // считать название улицы в строку
+            input >> street;
+            // считать номер дома в целочисленную переменную
+            input >> house_number;
+            // считать номер квартиры в целочисленную переменную
+            input >> flat_number;
+            // установить параметры для текущего адреса
+            address_arr[i].Set_city(city);
+            address_arr[i].Set_street(street);
+            address_arr[i].Set_house_number(house_number);
+            address_arr[i].Set_apart_number(flat_number);
+        }
+        
+        ofstream output("C:\\VHome Dump\\My Projects\\Home_Works\\Module_4\\M4_L5_Task_1\\out.txt");
 
-        }*/
+        output << address_count << endl;
+
+        for (int i = 0; i < address_count; ++i)
+        {
+            string city, street, house_number, flat_number;
+
+            address_arr[i].Get_city(city);
+            address_arr[i].Get_street(street);
+            address_arr[i].Get_house_number(house_number);
+            address_arr[i].Get_apart_number(flat_number);
+
+            // записать название города в файл
+            output << city;
+            // записать название улицы в файл
+            output << street;
+            // записать номер дома в файл
+            output << house_number;
+            // записать номер квартиры в файл
+            output << flat_number;
+            
+        }
+
+        delete[] address_arr;
         
     }
     else
     {
         cout << "File not found" << endl;
     }
+    return 0;
     }
