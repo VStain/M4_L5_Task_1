@@ -33,21 +33,21 @@ public:
     {
 
     }
-    string Get_city(string city)
+    string Get_city()
     {
-        return city_1 = city;
+        return city_1;
     }
-    string Get_street(string street)
+    string Get_street()
     {
-        return street_1 = street;
+        return street_1;
     }
-    int Get_house_number(string house_number)
+    int Get_house_number()
     {
-        return house_number_1 = stoi(house_number);
+        return house_number_1;
     }
-    int Get_apart_number(string apart_number)
+    int Get_apart_number()
     {
-        return apart_number__1 = stoi(apart_number);
+        return apart_number__1;
     }
 
     void Set_city(string city)
@@ -110,28 +110,20 @@ int main()
 
         output << address_count << endl;
 
-        for (int i = 0; i < address_count; ++i)
+        for (int i = address_count - 1; i >= 0; --i)
         {
-            string city, street, house_number, flat_number;
-
-            address_arr[i].Get_city(city);
-            address_arr[i].Get_street(street);
-            address_arr[i].Get_house_number(house_number);
-            address_arr[i].Get_apart_number(flat_number);
-
             // записать название города в файл
-            output << city;
+            output << address_arr[i].Get_city() << " ";
             // записать название улицы в файл
-            output << street;
+            output << address_arr[i].Get_street() << " ";
             // записать номер дома в файл
-            output << house_number;
+            output << address_arr[i].Get_house_number() << " ";
             // записать номер квартиры в файл
-            output << flat_number;
-            
+            output << address_arr[i].Get_apart_number() << " ";
+            output << endl;
         }
 
         delete[] address_arr;
-        
     }
     else
     {
